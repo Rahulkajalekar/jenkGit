@@ -44,7 +44,7 @@ namespace GithubActionsTestProj
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[contains(text(),'Get started')]")));
             IWebElement getStarted = driver.FindElement(By.XPath("//a[contains(text(),'Get started')]"));
 
-            if (getStarted.Text.ToUpper().Equals("GET STARTE"))
+            if (getStarted.Text.ToUpper().Equals("GET STARTED"))
             {
                 ExtentReportManager.test.Pass("Title contains GET STARTED");
             }
