@@ -25,8 +25,7 @@ namespace GithubActionsTestProj
             //options.AddArgument("--disable-gpu");
             driver = new FirefoxDriver();
             driver.Navigate().GoToUrl("https://playwright.dev");
-            //////
-            ///
+          
 
             // ✅ Create a new test node for each test case
             var testName = TestContext.CurrentContext.Test.Name;
