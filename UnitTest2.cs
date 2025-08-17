@@ -7,25 +7,18 @@ using SeleniumExtras.WaitHelpers;
 
 namespace GithubActionsTestProj
 {
-    public class UnitTest2
+    public class UnitTest2 : TestBase
     {
 
 
         IWebDriver driver;
 
 
-        [OneTimeSetUp]
-        public void OneTimeSetup()
-        {
-            ExtentReportManager.createReport();
-        }
-
 
         [SetUp]
         public void Setup()
         {
-            var testName = TestContext.CurrentContext.Test.Name;
-            ExtentReportManager.test = ExtentReportManager.extent.CreateTest($"{GetType().Name} - {testName}");
+            
             var options = new ChromeOptions();
             //options.AddArgument("--headless");
             //options.AddArgument("--no-sandbox");
@@ -33,6 +26,11 @@ namespace GithubActionsTestProj
             driver = new FirefoxDriver();
             driver.Navigate().GoToUrl("https://playwright.dev");
             //////
+            ///
+
+            // ✅ Create a new test node for each test case
+            var testName = TestContext.CurrentContext.Test.Name;
+            ExtentReportManager.test = ExtentReportManager.extent.CreateTest($"{GetType().Name} - {testName}");
 
         }
 
@@ -86,11 +84,7 @@ namespace GithubActionsTestProj
         }
 
 
-        [OneTimeTearDown]
-        public void TearDownReport()
-        {
-            ExtentReportManager.FlushReport();
-        }
+
 
 
 

@@ -1,51 +1,33 @@
-﻿
-
-using AventStack.ExtentReports;
+﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 
 namespace GithubActionsTestProj
 {
-    public class ExtentReportManager
+    public static class ExtentReportManager
     {
-
         public static ExtentReports extent;
+
+        [ThreadStatic] // each test thread gets its own ExtentTest
         public static ExtentTest test;
 
-
-
-        public static void createReport()
+        public static void CreateReport()
         {
+            if (extent == null) // make sure we don’t recreate
+            {
+                string outputDir = Path.Combine(Directory.GetCurrentDirectory(), "TestResults");
+                Directory.CreateDirectory(outputDir);
 
-            string outputDir = Path.Combine(Directory.GetCurrentDirectory(), "TestResults");
-            Directory.CreateDirectory(outputDir);
+                string reportFile = Path.Combine(outputDir, $"ExtentReport_{DateTime.Now:yyyyMMdd_HHmmss}.html");
+                var htmlReporter = new ExtentSparkReporter(reportFile);
 
-            var htmlReporter = new ExtentSparkReporter(Path.Combine(outputDir, "ExtentReport.html"));
-            extent = new ExtentReports();
-            extent.AttachReporter(htmlReporter);
-
-
-
-
-
-
+                extent = new ExtentReports();
+                extent.AttachReporter(htmlReporter);
+            }
         }
-
 
         public static void FlushReport()
         {
             extent.Flush();
         }
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
