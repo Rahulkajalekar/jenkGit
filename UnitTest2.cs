@@ -24,8 +24,8 @@ namespace GithubActionsTestProj
         [SetUp]
         public void Setup()
         {
-
-            ExtentReportManager.test = ExtentReportManager.extent.CreateTest(TestContext.CurrentContext.Test.Name);
+            var testName = TestContext.CurrentContext.Test.Name;
+            ExtentReportManager.test = ExtentReportManager.extent.CreateTest($"{GetType().Name} - {testName}");
             var options = new ChromeOptions();
             //options.AddArgument("--headless");
             //options.AddArgument("--no-sandbox");
