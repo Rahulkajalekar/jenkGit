@@ -1,4 +1,4 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -7,9 +7,9 @@ using SeleniumExtras.WaitHelpers;
 
 namespace GithubActionsTestProj
 {
-    public class UnitTest1
+    public class UnitTest2
     {
-        
+
 
         IWebDriver driver;
 
@@ -33,11 +33,11 @@ namespace GithubActionsTestProj
             driver = new FirefoxDriver();
             driver.Navigate().GoToUrl("https://playwright.dev");
             //////
-            
+
         }
 
         [Test]
-        public void TC01_verifyPalywrightPageTitle()
+        public void TC01_verifyPalywrightPageTitle_TS02()
         {
 
             String getTitle = driver.Title;
@@ -50,14 +50,14 @@ namespace GithubActionsTestProj
             {
                 ExtentReportManager.test.Fail("Title does not contain Fast and reliable");
             }
-            
+
         }
 
         [Test]
-        public void TC02_verifyPalywrightPage()
+        public void TC02_verifyPalywrightPage_TS02()
         {
 
-            OpenQA.Selenium.Support.UI.WebDriverWait wait = new OpenQA.Selenium.Support.UI.WebDriverWait(driver,TimeSpan.FromSeconds(10));
+            OpenQA.Selenium.Support.UI.WebDriverWait wait = new OpenQA.Selenium.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[contains(text(),'Get started')]")));
             IWebElement getStarted = driver.FindElement(By.XPath("//a[contains(text(),'Get started')]"));
 
@@ -69,7 +69,7 @@ namespace GithubActionsTestProj
             {
                 ExtentReportManager.test.Fail("Title does not contain GET STARTED");
             }
-            Assert.IsTrue(getStarted.Displayed,"Get Started Not Found.");
+            Assert.IsTrue(getStarted.Displayed, "Get Started Not Found.");
         }
 
 
